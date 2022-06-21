@@ -9,6 +9,7 @@ config.read('config.ini')
 app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = config['DB']['ORM']
+app.config['JSON_SORT_KEYS'] = False
 app.register_blueprint(allRoute, url_prefix="/")
 db = SQLAlchemy(app)
 
