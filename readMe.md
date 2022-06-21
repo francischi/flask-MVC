@@ -6,4 +6,4 @@ flask為python語言中能夠快速建立web server的輕量級框架，對於�
 ### Router <=> Controller <=> Service <=> Model <=> DB
 檔案路徑:
 
-![1](./pic/6-21.png)
+![1](https://github.com/francischi/flask-MVC/blob/master/pic/6-21.PNG?raw=true)
