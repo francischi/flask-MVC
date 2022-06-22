@@ -4,19 +4,37 @@ class UserController:
     def __init__(self):
         self.UserService = UserService()
 
-    def createUser(self):
-        name = request.values.get('name')
-        description = request.values.get('description')
+    def getAll(self):
         try:
-            self.UserService.createNew(name , description)
+            result = self.UserService.getAll()
             return make_response(
-                jsonify(
-                    {"success":"true"}
-                ), 
-            200)
+                    jsonify(
+                        {"success":"true",
+                        "result":result}
+                    ),200)
         except Exception as msg:
             return make_response(
                 jsonify(
                     {"success":"false","message":str(msg)}
-                ),
-             400)
+                ),400)
+
+    def createUser(self):
+        params = request.values
+        try:
+            if params['name']== "":
+                raise ValueError('name required')
+            if params['description']== "":
+                raise ValueError('description required')
+                
+            self.UserService.createNew(params)
+            return make_response(
+                jsonify(
+                    {"success":"true"}
+                ), 200)
+
+        except Exception as msg:
+            return make_response(
+                jsonify(
+                    {"success":"false","message":str(msg)}
+                ),400)
+

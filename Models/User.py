@@ -1,14 +1,18 @@
-from flask_sqlalchemy import SQLAlchemy
+from . import DB
+class User:
+    def __init__(self):
+        self.table = "user"
+        self.connector = DB.connector()
+    def getAll(self):
+        try:
+            connect = self.connector.connect()
+            with connect.cursor() as cursor:
+                command = "SELECT * FROM "+self.table
+                cursor.execute(command)
+                result = cursor.fetchall()
+            connect.close()
+            return result
+        except Exception as msg:
+            raise ValueError(msg)
 
-db = SQLAlchemy()
-class User(db.Model):
-    __tablename__ = 'user'
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(
-        db.String(36), nullable=False)
-    description = db.Column(
-        db.String(256), nullable=False)
-
-    def __init__(self, name, description):
-        self.name = name
-        self.description = description
+     

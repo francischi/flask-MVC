@@ -4,6 +4,16 @@ flask為python語言中能夠快速建立web server的輕量級框架，對於�
 此架構為現今較流行的MVC，架構如下(此為純前後端分離，因此少了MVC架構中的V)。
 
 ### Router <=> Controller <=> Service <=> Model <=> DB
+-------------------------------------
 檔案路徑:
 
 ![1](https://github.com/francischi/flask-MVC/blob/master/pic/6-21.PNG?raw=true)
+
+##Router
+將router獨立出一個py檔案，增加程式碼的可維護性及易讀性。
+##Controllers
+controller中只做接收前端傳入參數並檢查以及打包response的部分，其餘的事情(例如:商業邏輯，取DB資料，改DB資料...)則放到service中實作。
+##Service
+service顧名思義就是撰寫所有的服務包括商業邏輯以及使用model的部分，供controller調用。
+##Model
+Model為與資料庫串接部分，此專案分為兩部分示範，Models資料夾中為使用pymysql寫SQL語法進行串接，OrmModels則為使用SQLAlchemy
