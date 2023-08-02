@@ -14,7 +14,9 @@ flask為python語言中能夠快速建立web server的輕量級框架，對於�
 router的部分使用了flask中的Blueprint註冊進app中，將router獨立出一個py檔案可增加程式碼的可維護性及易讀性，當專案越來越大，API越來越多時，也能夠很好的管理與維護。
 ## Controllers
 controller中只做接收前端傳入參數以及打包response的部分，其餘的事情(例如:商業邏輯，取DB資料，改DB資料...)則放到service與repository中實作。
-## Service
+## Services
 service顧名思義就是撰寫所有的服務包括商業邏輯以及輸入參數的檢查，並供controller調用。
+## Repository
+repository負責與資料庫或任何外部連接(mq、db、cache等等...)。
 ## OrmModels
 OrmModels為與資料庫串接部分，使用SQLAlchemy。
