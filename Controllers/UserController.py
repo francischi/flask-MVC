@@ -1,5 +1,6 @@
 from flask import request,make_response,jsonify
-from Services.UserService import UserService
+from Services.UserService import UserService 
+
 class UserController:
     def __init__(self):
         self.UserService = UserService()
@@ -19,14 +20,16 @@ class UserController:
                 ),400)
 
     def createUser(self):
-        params = request.values
         try:
-            if params['name']== "":
-                raise ValueError('name required')
-            if params['description']== "":
-                raise ValueError('description required')
+            if request.is_json:
+                params = request.get_json()
+                name = params.get('name', None)
+                description = params.get('description', None)
+
+            else:
+                raise ValueError('data type error')
                 
-            self.UserService.createNew(params)
+            self.UserService.createNew(name , description)
             return make_response(
                 jsonify(
                     {"success":"true"}

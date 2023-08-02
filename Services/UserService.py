@@ -1,16 +1,15 @@
-from OrmModels.User import User as OrmUser
-from flask_sqlalchemy import SQLAlchemy
-from Models.User import User as ModelUser
+from Repositories.UserRepository import UserRepository
 
 class UserService:
     def __init__(self):
-        self.db = SQLAlchemy()
-        self.ModelUser = ModelUser()
+        self.UserRepository = UserRepository()
         
     def getAll(self):
-        return self.ModelUser.getAll()
+        return self.UserRepository.getAll()
 
-    def createNew(self,params):
-        user = OrmUser(params['name'] , params['description'])
-        self.db.session.add(user)
-        self.db.session.commit()
+    def createNew(self, name :str, description:str):
+        if name== "":
+            raise ValueError('name required')
+        if description== "":
+            raise ValueError('description required')
+        self.UserRepository.createNew(name,description)
